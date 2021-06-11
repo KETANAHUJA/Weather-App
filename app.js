@@ -3,9 +3,11 @@ const https = require("https");
 const bodyParser = require("body-parser");
 
 
+
 const app = express();
 
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.static(__dirname + '/public'));
 
 app.get("/",(req,res)=>{
     
@@ -18,7 +20,7 @@ app.post("/",(req,res)=>{
     const url = "https://api.openweathermap.org/data/2.5/weather?appid="+apikey+"&q="+query+"&units=metric";
     https.get(url,(response)=>{
         console.log(response.statusCode);
-    response.on("data",(data)=>{
+        response.on("data",(data)=>{
         const weatherdata = JSON.parse(data);
         // console.log(weatherdata);
         const temp = weatherdata.main.temp;
@@ -29,8 +31,9 @@ app.post("/",(req,res)=>{
         const imageUrl = "http://openweathermap.org/img/wn/"+icon+"@2x.png";
 
         // console.log(des);
-        res.write(`<p>The weather is Currently : ${des}</p>`);
-        res.write(`<h1>The Temprature in ${city} is :  ${temp} Celcius</h1>`);
+        res.write(`<p style="font-size: 50px; color:aqua;margin: 0 160px;
+        ">The Weather is Currently : ${des}</p>`);
+        res.write(`<h1 style=" font-size:40px color:black">The Temprature in ${city} is :  ${temp} Celcius</h1>`);
         res.write("<img src="+imageUrl+"></img>")
         res.send();
     })
