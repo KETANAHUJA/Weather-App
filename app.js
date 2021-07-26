@@ -30,10 +30,18 @@ app.post("/",(req,res)=>{
     const url = "https://api.openweathermap.org/data/2.5/weather?appid="+apikey+"&q="+query+"&units=metric";
     https.get(url,(response)=>{
         console.log(response.statusCode);
+        if(response.statusCode===404){
+            // res.write(`<h1 style=" text-align:center; font-size:40px color:black"Enter Correct City Name </h1>`);
+            res.sendFile(__dirname+"/failure.html");
+        }
+        else{
         response.on("data",(data)=>{
         const weatherdata = JSON.parse(data);
-        console.log(weatherdata);
+        // console.log(weatherdata.message);
+        
+        
         const temp = weatherdata.main.temp;
+        
         const humi = weatherdata.main.humidity;
         const tempmax = weatherdata.main.temp_max;
         const tempmin = weatherdata.main.temp_min;
@@ -71,7 +79,9 @@ app.post("/",(req,res)=>{
         Min-Temp :  ${tempmin} Celsius </h1>`);        
         res.write(`<h4 style=" text-align:center; font-size:20px color:black">The Humidity is :  ${humi} </h1>`);
         res.send();
+        
     })
+}
 
     });
 
