@@ -77,7 +77,7 @@ app.post("/",(req,res)=>{
         Max-Temp :  ${tempmax} Celsius </h1>`);   
         res.write(`<h4 style=" text-align:center; font-size:20px color:black">
         Min-Temp :  ${tempmin} Celsius </h1>`);        
-        res.write(`<h4 style=" text-align:center; font-size:20px color:black">The Humidity is :  ${humi} </h1>`);
+        res.write(`<h4 style=" text-align:center; font-size:20px color:black">The Humidity is :  ${humi} % </h1>`);
         res.send();
         
     })
