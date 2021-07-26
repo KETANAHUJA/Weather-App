@@ -1,7 +1,10 @@
 body 
 {
   background: #eee;
-  background: linear-gradient(0deg, rgba(0, 0, 200, 0.2) , rgba(0, 0, 200, 0) );
+  background: linear-gradient(0deg, rgba(0, 0, 200, 0.2) , rgba(0, 0, 200, 0));
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
 }
 .container{
     height: 100vh;
@@ -22,5 +25,9 @@ input{
     font-size:40px;
     /* margin-top: 100%%; */
     /* margin:auto 19px; */
+}
+.heading{
+    padding: 70px 250px 10px 380px;
+    margin-left: auto;
 }
 

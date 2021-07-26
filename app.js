@@ -2,7 +2,17 @@ const express = require("express");
 const https = require("https");
 const bodyParser = require("body-parser");
 
+function dateManage(date){
+    let days = ["Sunday" , "Monday" , "Tuesday" , "Wednesday" , "Thursday" , "Friday" , "Saturday"];
+    let months = ["Jnauary" , "Feburary" , "March" , "April" , "May" , "June" , "July" , "August" , "September" , "October" , "November" , "December"];
 
+    let year = date.getFullYear();
+    let month = months[date.getMonth()];
+    let date_ = date.getDate();
+    let day = days[date.getDay()];
+
+    return `${date_} ${month} (${day}), ${year}`;
+}
 
 const app = express();
 
@@ -22,19 +32,44 @@ app.post("/",(req,res)=>{
         console.log(response.statusCode);
         response.on("data",(data)=>{
         const weatherdata = JSON.parse(data);
-        // console.log(weatherdata);
+        console.log(weatherdata);
         const temp = weatherdata.main.temp;
+        const humi = weatherdata.main.humidity;
+        const tempmax = weatherdata.main.temp_max;
+        const tempmin = weatherdata.main.temp_min;
         // console.log(temp);
         const des = weatherdata.weather[0].description;
         const city = weatherdata.name;
         const icon = weatherdata.weather[0].icon;
-        const imageUrl = "http://openweathermap.org/img/wn/"+icon+"@2x.png";
+        const imageUrl = "http://openweathermap.org/img/wn/"+icon+"@4x.png";
 
         // console.log(des);
-        res.write(`<p style="font-size: 50px; color:aqua;margin: 0 160px;
-        ">The Weather is Currently : ${des}</p>`);
-        res.write(`<h1 style=" font-size:40px color:black">The Temprature in ${city} is :  ${temp} Celcius</h1>`);
-        res.write("<img src="+imageUrl+"></img>")
+        const todaydate = new Date();
+        const today = (dateManage(todaydate));
+        
+        res.write(`<p 
+        style="text-align:center;
+        font-size: 30px
+        "
+        >${today}</p>`);
+        res.write(`<p 
+        style="text-align:center;
+        font-size: 30px
+        "
+        >${city}, ${weatherdata.sys.country}</p>`);
+        res.write(`<span><p style="font-size: 50px; color:red;margin: 0 160px;
+        "> Weather is Currently : ${des}</p></span>
+        
+        `);
+        res.write("<img src="+imageUrl+"></img>");
+        res.write(`<h1 style=" text-align:center; font-size:40px color:black">The Temprature in ${city} is :  ${temp} Celcius</h1>`);
+
+       
+        res.write(`<h4 style=" text-align:center; font-size:20px color:black">
+        Max-Temp :  ${tempmax} Celsius </h1>`);   
+        res.write(`<h4 style=" text-align:center; font-size:20px color:black">
+        Min-Temp :  ${tempmin} Celsius </h1>`);        
+        res.write(`<h4 style=" text-align:center; font-size:20px color:black">The Humidity is :  ${humi} </h1>`);
         res.send();
     })
 

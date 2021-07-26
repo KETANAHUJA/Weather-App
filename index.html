@@ -7,14 +7,21 @@
     <title>Weather App</title>
     <link href="/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    
 </head>
 <body style="background: #eee;
-background: linear-gradient(0deg, rgba(0, 0, 200, 0.2) , rgba(0, 0, 200, 0)">
-    <div class="d-flex p-2 justify-content-center align-items-center" style="height: 100vh; width: 100vw;">
+background-image: url('/weather.png');
+background-size: 100vw;
+">
+    <h1 class="heading" style="color: black;
+    ">Check Live Weather</h1>
+    <div class="d-flex p-2 justify-content-center align-items-center" style="height: 100vh; width: 100vw;
+    "
+
+    >
         <div class="d-inline-flex p-2 ">
             <form action="/" method="POST">
-                <label for="cityInput" style="color: aqua; font-size: 30px;">City Name :</label> &nbsp;
+                <label for="cityInput" style="color:blue; font-size: 30px;">City Name :</label> &nbsp;
                 <input type="text" name="cityName" style="color: red; font-size: 30px;">
                 <button type="submit" class="btn btn-primary btn-xl" style="color: white; font-size: 30px; margin-bottom:17px;
                 margin-left: 22px;">Go</button>
