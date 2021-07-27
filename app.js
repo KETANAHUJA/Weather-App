@@ -37,13 +37,14 @@ app.post("/",(req,res)=>{
         else{
         response.on("data",(data)=>{
         const weatherdata = JSON.parse(data);
-        // console.log(weatherdata.message);
+        console.log(weatherdata);
         
         
         const temp = weatherdata.main.temp;
         
         const humi = weatherdata.main.humidity;
         const tempmax = weatherdata.main.temp_max;
+        const feelstemp = weatherdata.main.feels_like;
         const tempmin = weatherdata.main.temp_min;
         // console.log(temp);
         const des = weatherdata.weather[0].description;
@@ -72,7 +73,9 @@ app.post("/",(req,res)=>{
         res.write("<img src="+imageUrl+"></img>");
         res.write(`<h1 style=" text-align:center; font-size:40px color:black">The Temprature in ${city} is :  ${temp} Celcius</h1>`);
 
-       
+        res.write(`<h4 style=" text-align:center; font-size:20px color:black">
+        Feels Like :  ${feelstemp} Celsius </h1>`);
+
         res.write(`<h4 style=" text-align:center; font-size:20px color:black">
         Max-Temp :  ${tempmax} Celsius </h1>`);   
         res.write(`<h4 style=" text-align:center; font-size:20px color:black">
